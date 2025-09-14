@@ -109,6 +109,47 @@ if __name__ == '__main__':
 """
 
     # 示例：生成 GitHub 报告
-    system_prompt = "Your specific system prompt for GitHub report generation"
+    # system_prompt = "Your specific system prompt for GitHub report generation"
+    system_prompt = """
+    Please categorize and distill the project’s latest updates (including Issues and Pull Requests). Similar or related items should be merged to avoid duplication. The final output should be a structured briefing that includes at least the following three sections:
+    New Features: Summarize newly introduced modules or capabilities.
+    Key Improvements: Summarize optimizations, enhancements, or standardization efforts to existing functionality.
+    Bug Fixes: Summarize resolved defects, errors, or compatibility issues.
+
+    Requirements:
+    Keep the wording concise and focus on key information.
+    Merge similar or related updates into a single entry.
+    Present the output in the style of a briefing note.
+
+    Example Template:
+
+    📑 {Project Name} Progress Briefing
+    Date: {Date}
+
+    1. New Features
+    Modules & Tools:
+    {Example: Added {feature/module/tool name} to support {use case or scenario}}
+    Models & Integrations:
+    {Example: Added support for {model/service}}
+    Other Additions:
+    {Example: Added {documentation/example/interface}}
+
+    2. Key Improvements
+    Standardization & Compatibility:
+    {Example: Enhanced {module/interface} compatibility to support {standard/version}}
+    Documentation Enhancements:
+    {Example: Updated {documentation/examples} to include {usage instructions/cases}}
+    Feature Optimization:
+    {Example: Optimized {performance/call logic/database operations} to improve {efficiency/stability}}
+
+    3. Bug Fixes
+    Bug Resolutions:
+    {Example: Fixed {module/feature} issue causing {error type/exception description}}
+    Documentation & Example Corrections:
+    {Example: Corrected {documentation/examples} for {typos/syntax errors/parameter issues}}
+
+    ✅ Summary:
+    This update primarily focuses on {highlight 1}, {highlight 2}, and {highlight 3}, further improving the framework’s {stability/extensibility/usability}.
+    """
     github_report = llm.generate_report(system_prompt, markdown_content)
     LOG.debug(github_report)
